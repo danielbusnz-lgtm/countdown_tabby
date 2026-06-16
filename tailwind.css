@@ -472,11 +472,23 @@
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  /* deeper-descender system fonts (Linux DejaVu/Noto, Windows Segoe UI) push
+     y/g/p tails past the tight line box; background-clip:text then crops them.
+     grow the box down, pull it back with margin so layout doesn't shift. */
+  padding-bottom: 0.2em;
+  margin-bottom: -0.2em;
 }
 @media (min-width: 40rem) {
   .heading-lg {
     font-size: 2.75rem;
   }
+}
+
+/* same descender-safe trick for headings on tight Tailwind leading
+   (text-5xl ships line-height:1), without the gradient clip */
+.descender-safe {
+  padding-bottom: 0.2em;
+  margin-bottom: -0.2em;
 }
 
 /* footer GitHub pill: accent outline + gold stars on hover */
